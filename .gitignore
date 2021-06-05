@@ -1,6 +1,6 @@
 # General
 /venv/*
-/demo/*
+/demo/checkpoint.th
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
