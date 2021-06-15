@@ -31,7 +31,12 @@ parser.add_argument("--mix_dir", type=str, default=None,
                     help="Directory including mix wav files")
 parser.add_argument("--mix_json", type=str, default=None,
                     help="Json file including mix wav files")
-parser.add_argument('--device', default="cuda")
+
+if torch.cuda.is_available():
+    parser.add_argument('--device', default="cuda")
+else:
+    parser.add_argument('--device', default="cpu")
+
 parser.add_argument("--sample_rate", default=8000,
                     type=int, help="Sample rate")
 parser.add_argument("--batch_size", default=1, type=int, help="Batch size")
@@ -85,7 +90,11 @@ def separate(args, model=None, local_out_dir=None):
     # Load model
     if not model:
         # model
-        pkg = torch.load(args.model_path)
+        if torch.cuda.is_available():
+            pkg = torch.load(args.model_path)
+        else:
+            pkg = torch.load(args.model_path, map_location=torch.device('cpu'))
+
         if 'model' in pkg:
             model = pkg['model']
         else:
@@ -124,7 +133,6 @@ def separate(args, model=None, local_out_dir=None):
             # save wav files
             save_wavs(estimate_sources, mixture, lengths,
                       filenames, out_dir, sr=args.sample_rate)
-
 
 if __name__ == "__main__":
     args = parser.parse_args()
