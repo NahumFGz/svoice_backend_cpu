@@ -1,7 +1,7 @@
 librosa==0.7.1
 numba==0.48
 tqdm==4.51.0
-omegacon==2.0.6
+omegaconf==2.0.6
 Flask==2.0.1
 Flask-Cors==3.0.10
 boto3==1.17.93
