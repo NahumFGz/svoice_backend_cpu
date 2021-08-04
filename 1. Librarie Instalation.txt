@@ -1,0 +1,30 @@
+-- Configuración de EC2 - Ubuntu 18.04 LTS
+
+User: ubuntu
+
+Copiar los datos en el ec2
+
+--Instalar python3.7
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.7
+
+-- Install PIP
+sudo apt install python3-pip
+pip3 --version
+
+-- Install virtualenv
+pip3 install virtualenv
+sudo apt install virtualenv
+sudo apt-get upgrade python3-virtualenv
+which virtualenv
+virtualenv -p /usr/bin/python3.7 venv
+source venv/bin/activate
+--> deactivate
+--> rm -rf venv (para eliminar)
+
+-- Install libraries
+sudo apt-get install libsndfile1-dev
+pip install -r requirements.txt
+pip install torch==1.9.0+cpu torchvision==0.10.0+cpu torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html

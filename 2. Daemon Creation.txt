@@ -1,0 +1,25 @@
+#Crear daemon
+sudo nano /home/ubuntu/svoice_backend/run-venv.sh             #Crear el batch que va correr el venv
+sudo chmod +x /home/ubuntu/svoice_backend/run-venv.sh     #Cambiar permisos
+sudo nano /home/ubuntu/svoice_backend/run-startup.sh             #Crear el batch que va correr el los servicios de python
+sudo chmod +x /home/ubuntu/svoice_backend/run-startup.sh     #Cambiar permisos
+
+sudo nano /etc/systemd/system/my-startup.service   #Registrar el servicio
+sudo systemctl enable my-startup.service                    #Correr el servicio
+
+sudo reboot                                                    #Le metemos su reiniciada para probar
+systemctl status my-startup.service                #Verificar el estado del servicio
+sudo systemctl disable my-startup.service      #Para modificar los scripts siempre desactivar
+ps uax | grep python3                                      #Ver si corrió el servicio
+
+#Registro del servicio
+/*
+Unit]
+Description=Startup
+
+[Service]
+ExecStart=/home/ubuntu/svoice_backend/run-startup.sh
+
+[Install]
+WantedBy=multi-user.target
+*/
