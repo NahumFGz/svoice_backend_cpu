@@ -1,0 +1,4 @@
+sudo -s
+source venv/bin/activate
+cd svoice_backend
+python3 main.py

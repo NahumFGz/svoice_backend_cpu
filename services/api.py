@@ -16,7 +16,7 @@ from svoice.separate_api import separate as svoice_separate
 app = Flask(__name__)
 CORS(app)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ubuntu/speechtotext-321901-827538e8fd7f.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ubuntu/speechtotext-321901-1976c2a44069.json"
 
 @app.route("/")
 def home():
@@ -148,10 +148,26 @@ def translate():
                 os.remove(f)
             except:
                 pass
+
+        
+        file_txt_name = flac_file.split('.')[0] + '.txt'
+        file_txt = open(file_txt_name, "w+") 
+        file_txt.write(text_translate) 
+        file_txt.close() 
+
+        s3_client.upload_file(
+            file_txt_name,
+            bucket,
+            'out/{}'.format(
+                file_txt_name.replace('\\', '/').split('/')[-1]
+            )
+        )
             
+        print(6)
         return  jsonify({
                 "message": "success",
-                "translate": text_translate
+                "translate": text_translate,
+                "translate_file": 'out/{}'.format(file_txt_name.replace('\\', '/').split('/')[-1])
             })
     except Exception as e:
         return jsonify({
