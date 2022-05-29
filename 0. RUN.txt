@@ -1,4 +1,4 @@
 sudo -s
-source venv/bin/activate
-cd svoice_backend
+source my_env/bin/activate
+cd svoice_backend_cpu
 python3 main.py

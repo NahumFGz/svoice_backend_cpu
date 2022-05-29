@@ -20,10 +20,9 @@ pip3 --version
 -- Install virtualenv
 pip3 install virtualenv
 apt install virtualenv
-apt-get upgrade python3-virtualenv
-which virtualenv
-virtualenv -p /usr/bin/python3.7 venv
-source venv/bin/activate
+apt-get upgrade python3.8-virtualenv
+python3 -m venv my_env
+source my_env/bin/activate
 --> deactivate
 --> rm -rf venv (para eliminar)
 
